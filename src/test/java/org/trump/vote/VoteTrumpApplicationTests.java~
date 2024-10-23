@@ -1,0 +1,13 @@
+package org.trump.vote;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class VoteTrumpApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
