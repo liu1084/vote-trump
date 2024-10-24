@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c)  江苏二十六度节能科技研究院有限公司版权所有 2019 - 2020.
-  -->
 
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
@@ -31,8 +28,8 @@
 
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://114.55.210.76:3306/yf_safe_saas"
-                        userId="root" password="yunFANG@123">
+                        connectionURL="jdbc:mysql://localhost:3306/vote_trump"
+                        userId="root" password="sinoval@2022">
             <!-- 参考文档：-->
             <!-- http://www.mybatis.org/generator/running/runningWithMaven.html -->
             <!-- http://www.mybatis.org/generator/usage/mysql.html -->
@@ -48,7 +45,7 @@
         </javaTypeResolver>
 
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.shijiuzhi.yslive.entity"
+        <javaModelGenerator targetPackage="org.trump.vote.entity"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -58,7 +55,7 @@
             <property name="enablesubpackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shijiuzhi.yslive.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.trump.vote.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -72,8 +69,13 @@
             &lt;!&ndash;<columnOverride column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>&ndash;&gt;
         </table>-->
 
-        <table tableName="biz_enterprise_monitor" domainObjectName="BizEnterpriseMonitor"
+        <table tableName="twitter_user" domainObjectName="TwitterUser"
                enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table tableName="vote_record" domainObjectName="VoteRecord"
+               enableCountByExample="true" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
     </context>
