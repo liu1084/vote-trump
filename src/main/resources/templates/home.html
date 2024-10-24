@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Vote Trump</title>
 </head>
 <body>
+    <p th:text="'Hello, ' + ${name} + '!'">Static greeting</p>
     <div>Login</div>
 </body>
 </html>

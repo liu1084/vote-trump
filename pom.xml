@@ -21,7 +21,31 @@
         <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
         <start-class>org.trump.vote.VoteTrumpApplication</start-class>
         <lombok.version>1.18.28</lombok.version>
+        <scribejava.version>8.0.0</scribejava.version>
+        <gson.version>2.9.1</gson.version>
+        <mybatis-spring.version>2.2.2</mybatis-spring.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>internal</id>
+            <url>http://maven.cinaval.com:8081/repository/cinaval-maven-groups/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url> <!-- the https you've been looking for -->
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false
+                </enabled> <!-- or set to false if desired, default is true https://stackoverflow.com/a/61684539/32453 -->
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -31,12 +55,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
-            <version>${spring-boot.version}</version>
+            <version>${mybatis-spring.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -63,7 +82,21 @@
             <artifactId>spring-session-data-redis</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-apis</artifactId>
+            <version>${scribejava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-core</artifactId>
+            <version>${scribejava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -89,6 +122,12 @@
             <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+                <groupId>com.cinaval.cache.redis</groupId>
+                <artifactId>cinaval-redis-starter</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
     </dependencies>
 
     <build>
@@ -144,7 +183,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-             <plugin>
+            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>${dockerfile-maven.version}</version>
