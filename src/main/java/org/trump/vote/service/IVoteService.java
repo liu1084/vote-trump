@@ -1,6 +1,7 @@
 package org.trump.vote.service;
 
 import org.trump.vote.entity.TwitterUser;
+import org.trump.vote.entity.VoteRecord;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,9 @@ import java.util.List;
 public interface IVoteService {
     void cacheTwitterUser(TwitterUser twitterUser);
 
-    TwitterUser getTwitterUser(String userId);
+    TwitterUser getCachedTwitterUser(String userId);
+
+    List<VoteRecord> getLatestRecord(int count);
 
     boolean isVoted(String userId);
 
@@ -16,7 +19,7 @@ public interface IVoteService {
 
     long getTotalVotes();
 
-    List<String> getVotedUserIds();
+    List<String> getVotedUsers();
 
     List<Long> getVoteCountsBetweenDays(Date start, Date end);
 

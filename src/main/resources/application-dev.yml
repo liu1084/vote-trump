@@ -1,18 +1,46 @@
 isDebug: true
-spring:
-  datasource:
+mysql:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/vote_trump?createDatabaseIfNotExist=true&&serverTimezone=Asia/Shanghai&&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false
     username: root
     password: sinoval@2022
     connection-timeout: 30000
- 
-  redis:
-    host: localhost
-    port: 6379
-    password: proaim@2019
-    database: 0
-    
+
+spring:
+    redis:
+        host: localhost
+        port: 6379
+        password: sinoval@2022 # 如果 Redis 没有密码，可以省略
+        database: 0 # 使用的数据库索引，默认是0
+
+storage:
+    minio:
+        enabled: true
+        url: 'https://oss.cinaval.com:9002'
+        accessKey: "AINE9CHPPUPPHINNKV5Y"
+        secretKey: "XOzpH2JGQl+NznwQtm6++p4UpO+7yEL2bnlC2kb+"
+        secure: false
+        bucketName: "bucket02"
+        metricName: "minio.storage"
+        checkBucket: true
+        createBucket: true
+    allowed:
+        mime-types:
+            - image/jpg
+            - image/jpeg
+            - image/gif
+            - image/png
+            - application/vnd.ms-excel
+            - application/x-tika-ooxml
+            - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            - application/x-tika-msoffice
+            - video/mp4
+            - text/plain
+            - text/csv
+            - text/x-sql
+            - application/zip
+        file-size: 200 #200MB
+
 app:
-    domain-name: http://localhost
-    port: 8080
+    domainName: http://localhost
+    port: ${server.port}

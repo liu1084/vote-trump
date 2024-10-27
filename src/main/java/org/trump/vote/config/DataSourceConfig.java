@@ -1,4 +1,3 @@
-
 package org.trump.vote.config;
 
 import com.zaxxer.hikari.HikariDataSource;
@@ -33,10 +32,10 @@ import java.io.IOException;
 @EnableTransactionManagement
 @Order(-1)
 public class DataSourceConfig implements TransactionManagementConfigurer {
-	private static final String MAPPER_LOCATION = "classpath*:mappers/**/*Mapper.xml";
+    private static final String MAPPER_LOCATION = "classpath*:mappers/**/*Mapper.xml";
 
-	@Autowired
-	private AppConfigBean appConfigBean;
+    @Autowired
+    private AppConfigBean appConfigBean;
 
     @Bean(name = "dataSource")
     @Primary
@@ -50,41 +49,41 @@ public class DataSourceConfig implements TransactionManagementConfigurer {
         return dataSource;
     }
 
-	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactory getSqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws IOException {
+    @Bean(name = "sqlSessionFactory")
+    public SqlSessionFactory getSqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws IOException {
 
-		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-		factoryBean.setDataSource(dataSource);
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(dataSource);
 
-		// 添加XML目录
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		try {
-			factoryBean.setMapperLocations(resolver.getResources(MAPPER_LOCATION));
-			SqlSessionFactory factory = factoryBean.getObject();
+        // 添加XML目录
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            factoryBean.setMapperLocations(resolver.getResources(MAPPER_LOCATION));
+            SqlSessionFactory factory = factoryBean.getObject();
 
-			factory.getConfiguration().setMapUnderscoreToCamelCase(true);
-			return factoryBean.getObject();
-		} catch (Exception e) {
-			log.warn("getSqlSessionFactory failed, errorMessage:{}", e);
-			throw new RuntimeException(e);
-		}
-	}
+            factory.getConfiguration().setMapUnderscoreToCamelCase(true);
+            return factoryBean.getObject();
+        } catch (Exception e) {
+            log.warn("getSqlSessionFactory failed, errorMessage:{}", e);
+            throw new RuntimeException(e);
+        }
+    }
 
-	@Bean(name = "sqlSessionTemplate")
-	public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
-		return new SqlSessionTemplate(sqlSessionFactory);
-	}
+    @Bean(name = "sqlSessionTemplate")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 
-	@Bean(name = "annotationDrivenTransactionManager")
-	@Override
-	public DataSourceTransactionManager annotationDrivenTransactionManager() {
-		try {
-			DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-			transactionManager.setDataSource(readDataSource());
-			transactionManager.setDefaultTimeout(appConfigBean.getMySQLProperty().getConnectionTimeout());
-			return transactionManager;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    @Bean(name = "annotationDrivenTransactionManager")
+    @Override
+    public DataSourceTransactionManager annotationDrivenTransactionManager() {
+        try {
+            DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+            transactionManager.setDataSource(readDataSource());
+            transactionManager.setDefaultTimeout(appConfigBean.getMySQLProperty().getConnectionTimeout());
+            return transactionManager;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -1,9 +1,12 @@
 package org.trump.vote.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.trump.vote.entity.VoteRecord;
 import org.trump.vote.entity.VoteRecordExample;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -23,4 +26,8 @@ public interface VoteRecordMapper {
     int updateByPrimaryKey(VoteRecord record);
 
     int countByUserId(String userId);
+
+    List<VoteRecord> getLatestRecord(@Param("count") Integer count);
+
+    long totalCount();
 }

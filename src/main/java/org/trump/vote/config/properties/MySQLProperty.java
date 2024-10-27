@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource")
+@ConfigurationProperties(prefix = "mysql")
 @Data
 public class MySQLProperty {
     private String driverClassName;
