@@ -23,8 +23,9 @@ video {
     padding: 0 150px;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
+    font-size: 45px;
     font-weight: bold;
+    color: #ffffff;
 }
 
 .container .main {
@@ -35,6 +36,9 @@ video {
     font-size: 30px;
     font-weight: bold;
     padding: 10px 20px;
+    color: #fffaa5;
+    text-shadow: 1px 1px #31808c;
+    background: linear-gradient(to bottom, transparent, #f38630);
 }
 
 .container .main .left-side {
@@ -68,7 +72,7 @@ video {
 
 .container .status .notice {
     font-size: 30px;
-    color: #e50935;
+    color: #000000;
 }
 
 .container .states .upload .fileupload-notice {
@@ -94,6 +98,8 @@ video {
     font-size: 20px;
     list-style: circle;
     padding: 20px 0;
+    font-weight: bold;
+    color: #000;
 }
 
 .container .states {
