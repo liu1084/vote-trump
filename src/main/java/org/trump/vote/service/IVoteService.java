@@ -1,10 +1,12 @@
 package org.trump.vote.service;
 
 import org.trump.vote.entity.TwitterUser;
+import org.trump.vote.entity.VoteCountsBy30Minutes;
+import org.trump.vote.entity.VoteCountsByDays;
 import org.trump.vote.entity.VoteRecord;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface IVoteService {
     void cacheTwitterUser(TwitterUser twitterUser);
@@ -17,13 +19,11 @@ public interface IVoteService {
 
     void vote(String userId, String proofImageUrl);
 
-    long getTotalVotes();
+    Optional<Long> getTotalVotes();
 
-    List<String> getVotedUsers();
+    List<TwitterUser> getVotedUsers(int min);
 
-    List<Long> getVoteCountsBetweenDays(Date start, Date end);
+    List<VoteCountsByDays> getVoteCountsByMonth();
 
-    List<Long> getVoteCountsByDays(Date start, Date end);
-
-    String showHome();
+    List<VoteCountsBy30Minutes> trending();
 }

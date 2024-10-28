@@ -4,23 +4,21 @@ import com.cinaval.storage.model.BucketItem;
 import com.cinaval.storage.service.IStorageService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.trump.vote.entity.TwitterUser;
+import org.trump.vote.entity.VoteCountsBy30Minutes;
+import org.trump.vote.entity.VoteCountsByDays;
 import org.trump.vote.entity.VoteRecord;
 import org.trump.vote.service.IVoteService;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.trump.vote.constant.ApiConstant.API_V1;
 
-@Controller
+@RestController
 @RequestMapping(API_V1 + "/vote")
 public class VoteController {
 
@@ -56,35 +54,30 @@ public class VoteController {
     }
 
 
-    @GetMapping("/home")
-    @ApiOperation(value = "主页", notes = "主页")
-    public String index() {
-        return "home";
-    }
-
-    @GetMapping(value = "/latestVoters")
+    @GetMapping(value = "/latestVoters", produces = "application/json")
     @ApiOperation(value = "最新投票者", notes = "最新投票者")
-    public List<VoteRecord> latestVoters() {
-        return voteService.getLatestRecord(10);
+    public ResponseEntity<List<VoteRecord>> latestVoters() {
+        List<VoteRecord> latestRecord = voteService.getLatestRecord(10);
+        return ResponseEntity.ok(latestRecord);
     }
 
-    @GetMapping(value = "/totalVoters")
+    @GetMapping(value = "/totalVoters", produces = "application/json")
     @ApiOperation(value = "总投票人数", notes = "总投票人数")
-    public long totalVoters() {
-        return voteService.getTotalVotes();
+    public ResponseEntity<Long> totalVoters() {
+        Optional<Long> total = voteService.getTotalVotes();
+        return ResponseEntity.of(total);
     }
 
-    @GetMapping(value = "/voteCountsByDays")
-    @ApiOperation(value = "每天的投票人数", notes = "投票人数")
-    public List<Long> voteCountsBetweenDays(@RequestParam("start") Date start,
-                                            @RequestParam("end") Date end) {
-        return voteService.getVoteCountsByDays(start, end);
+    @GetMapping(value = "/voteCountsByMonth", produces = "application/json")
+    @ApiOperation(value = "查询最近30天内每天的投票人数", notes = "投票人数")
+    public List<VoteCountsByDays> getVoteCountsByMonth() {
+        return voteService.getVoteCountsByMonth();
     }
 
-    @GetMapping(value = "/trending")
-    @ApiOperation(value = "投票趋势", notes = "投票趋势")
-    public List<Long> trending(@RequestParam("start") Date start,
-                               @RequestParam("end") Date end) {
-        return voteService.getVoteCountsBetweenDays(start, end);
+    @GetMapping(value = "/trending", produces = "application/json")
+    @ApiOperation(value = "查询最近7天，每30分钟的投票数。", notes = "投票趋势")
+    public ResponseEntity<List<VoteCountsBy30Minutes>> trending() {
+        List<VoteCountsBy30Minutes> trendingCount = voteService.trending();
+        return ResponseEntity.ok(trendingCount);
     }
 }

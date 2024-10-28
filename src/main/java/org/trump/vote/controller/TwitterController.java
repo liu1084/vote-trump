@@ -41,7 +41,7 @@ public class TwitterController {
     @Value("${debug}")
     private boolean isDebug;
 
-    @GetMapping("/login")
+    @GetMapping(value = "/login", produces = "text/html")
     @ApiOperation(value = "Twitter 登录", notes = "Twitter 登录")
     public String login() throws IOException, ExecutionException, InterruptedException {
 
@@ -51,12 +51,12 @@ public class TwitterController {
         // 获取请求令牌
         OAuth1RequestToken requestToken = oAuth10aService.getRequestToken();
 
-        String oauthToken = requestToken.getToken();
-        String oauthTokenSecret = requestToken.getTokenSecret();
+//        String oauthToken = requestToken.getToken();
+//        String oauthTokenSecret = requestToken.getTokenSecret();
 
-        if (isDebug) {
-            log.debug("oauth_token = {}, oauth_token_secret = {}", oauthToken, oauthTokenSecret);
-        }
+//        if (isDebug) {
+//            log.debug("oauth_token = {}, oauth_token_secret = {}", oauthToken, oauthTokenSecret);
+//        }
 
         // Twitter 授权页面
         String authUrl = oAuth10aService.getAuthorizationUrl(requestToken);

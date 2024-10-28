@@ -5,13 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.trump.vote.entity.TwitterUser;
+import org.trump.vote.entity.VoteCountsBy30Minutes;
+import org.trump.vote.entity.VoteCountsByDays;
 import org.trump.vote.entity.VoteRecord;
 import org.trump.vote.mapper.VoteRecordMapper;
 import org.trump.vote.service.IVoteService;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.trump.vote.constant.VoteConstant.CACHE_SEPARATOR;
 import static org.trump.vote.constant.VoteConstant.USER_CACHE_PREFIX;
@@ -68,28 +70,24 @@ public class VoteServiceImpl implements IVoteService {
     }
 
     @Override
-    public long getTotalVotes() {
-        return voteRecordMapper.totalCount();
+    public Optional<Long> getTotalVotes() {
+        long total = voteRecordMapper.totalCount();
+        return Optional.of(total);
     }
 
     @Override
-    public List<String> getVotedUsers() {
+    public List<TwitterUser> getVotedUsers(int min) {
+        return voteRecordMapper.votedUsers(min);
+    }
 
-        return Collections.emptyList();
+
+    @Override
+    public List<VoteCountsByDays> getVoteCountsByMonth() {
+        return voteRecordMapper.voteCountsByMonth();
     }
 
     @Override
-    public List<Long> getVoteCountsBetweenDays(Date start, Date end) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<Long> getVoteCountsByDays(Date start, Date end) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public String showHome() {
-        return "";
+    public List<VoteCountsBy30Minutes> trending() {
+        return voteRecordMapper.voteCountsBy30Minutes();
     }
 }

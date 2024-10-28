@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -33,7 +34,8 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false);
 
         docket = docket.select()
-                .paths(regex("/api/v1/.*"))
+                .apis(RequestHandlerSelectors.basePackage("org.trump.vote.controller"))
+                .paths(regex("/.*"))
                 .build();
 
         return docket;

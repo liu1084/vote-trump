@@ -20,7 +20,7 @@ public class OAuthConfiguration {
 
     @Bean
     public OAuth10aService twitterService() {
-        String url = domainName + ":" + port;
+        String url = domainName;
 
         return new ServiceBuilder(API_KEY)
                 .apiSecret(API_SECRET)

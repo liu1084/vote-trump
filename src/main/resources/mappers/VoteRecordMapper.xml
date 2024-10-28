@@ -40,7 +40,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id,
+        id
+        ,
         twitter_user_id,
         vote_date,
         proof_image_url,
@@ -170,5 +171,41 @@
     <select id="totalCount" resultType="java.lang.Long">
         select count(1)
         from vote_record
+    </select>
+
+    <select id="voteCountsByMonth" resultType="org.trump.vote.entity.VoteCountsByDays">
+        SELECT
+            DATE (vote_date) AS vote_day, COUNT (*) AS vote_count
+        FROM
+            vote_record
+        WHERE
+            vote_date >= DATE_SUB(CURDATE()
+            , INTERVAL 30 DAY)
+        GROUP BY
+            vote_day
+        ORDER BY
+            vote_day;
+    </select>
+
+    <select id="voteCountsBy30Minutes" resultType="org.trump.vote.entity.VoteCountsBy30Minutes">
+        SELECT
+            DATE (vote_date) AS vote_day, DATE_FORMAT(vote_date, '%Y-%m-%d %H:%i:00') AS vote_half_hour, COUNT (*) AS vote_count
+        FROM
+            vote_record
+        WHERE
+            vote_date >= DATE_SUB(NOW()
+            , INTERVAL 7 DAY)
+        GROUP BY
+            vote_day, FLOOR(MINUTE (vote_date) / 30), HOUR (vote_date)
+        ORDER BY
+            vote_day, vote_half_hour;
+    </select>
+
+    <select id="votedUsers" resultType="org.trump.vote.entity.TwitterUser">
+        SELECT twitter_user_id,
+               vote_date,
+               proof_image_url
+        FROM vote_record
+        ORDER BY vote_date DESC LIMIT 10;
     </select>
 </mapper>

@@ -3,8 +3,7 @@ package org.trump.vote.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.trump.vote.entity.VoteRecord;
-import org.trump.vote.entity.VoteRecordExample;
+import org.trump.vote.entity.*;
 
 import java.util.List;
 
@@ -30,4 +29,10 @@ public interface VoteRecordMapper {
     List<VoteRecord> getLatestRecord(@Param("count") Integer count);
 
     long totalCount();
+
+    List<VoteCountsByDays> voteCountsByMonth();
+
+    List<VoteCountsBy30Minutes> voteCountsBy30Minutes();
+
+    List<TwitterUser> votedUsers(int min);
 }
