@@ -9,13 +9,7 @@ server:
         context-path: /
     #spring工程优雅停机， 非kill -9方式处理
     shutdown: graceful
-    port: 8443
-    ssl:
-        enabled: true
-        key-store: classpath:ssl/keystore.jks
-        key-store-password: bbcchinese
-        key-store-type: JKS
-
+    port: 8080
 
 mybatis:
     mapper-locations: classpath:mappers/*.xml

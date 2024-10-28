@@ -20,7 +20,7 @@ storage:
         accessKey: "AINE9CHPPUPPHINNKV5Y"
         secretKey: "XOzpH2JGQl+NznwQtm6++p4UpO+7yEL2bnlC2kb+"
         secure: false
-        bucketName: "bucket02"
+        bucketName: "bucket01"
         metricName: "minio.storage"
         checkBucket: true
         createBucket: true
@@ -30,17 +30,10 @@ storage:
             - image/jpeg
             - image/gif
             - image/png
-            - application/vnd.ms-excel
-            - application/x-tika-ooxml
-            - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-            - application/x-tika-msoffice
             - video/mp4
             - text/plain
-            - text/csv
-            - text/x-sql
-            - application/zip
-        file-size: 200 #200MB
+        file-size: 20 #200MB
 
 app:
-    domainName: https://dda3-112-86-203-141.ngrok-free.app
-    port: ${server.port}
+    domainName: https://www.vote-trump.org
+    port: 443

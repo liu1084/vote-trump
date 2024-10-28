@@ -23,15 +23,6 @@ public class VoteTrumpApplication implements CommandLineRunner {
     private String applicationName;
 
     public static void main(String[] args) {
-
-        String proxyHost = "127.0.0.1";
-        String proxyPort = "7890";
-
-        if (proxyHost != null && proxyPort != null) {
-            System.setProperty("https.proxyHost", proxyHost);
-            System.setProperty("https.proxyPort", proxyPort);
-        }
-
         SpringApplication.run(VoteTrumpApplication.class, args);
     }
 

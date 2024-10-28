@@ -7,18 +7,140 @@
     <meta name="description" content="Vote for Trump, make American great again!"/>
     <meta name="keywords" content="Vote Trump, Trump 2024, Vote for Trump">
     <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/wowslider.css}"/>
     <link rel="stylesheet" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" th:href="@{/css/upload.css}"/>
 </head>
 <body>
+<!-- 视频背景 -->
+<video autoplay muted loop>
+    <source th:src="@{/videos/background.mp4}" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 <div class="container">
-    <div class="header">header</div>
-    <div class="main">main</div>
-    <div class="footer">
-        <a href="https://www.paypal.com/paypalme/jim1084?country.x=C2&locale.x=zh_XC">
-            <img th:src="@{/images/paypal-donate.png}" height="50px" alt="paypal-donate"/>
-        </a>
+    <div class="header">
+        <h2>Take America Back. And Make America Great Again</h2>
     </div>
-    <script th:src="@{/js/scripts.js}"></script>
+    <div class="main">
+        <div class="left-side">
+            <div id="wowslider-container">
+                <div class="ws_images">
+                    <ul>
+                        <li><img th:src="@{/images/silder/7.jpg}" alt="" title="" id="wows_0"/></li>
+                        <li><img th:src="@{/images/silder/1.jpg}" alt="" title="" id="wows_1"/></li>
+                        <li><img th:src="@{/images/silder/2.png}" alt="" title="" id="wows_2"/></li>
+                        <li><img th:src="@{/images/silder/5.jpg}" alt="" title="" id="wows_3"/></li>
+                        <li><img th:src="@{/images/silder/8.jpg}" alt="" title="" id="wows_4"/></li>
+                        <li><img th:src="@{/images/silder/4.jpg}" alt="" title="" id="wows_5"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="notice">
+                <p>If you've voted for Donald Trump at the polling station but the printed
+                    result shows Harris
+                    instead, please rate your ballot and provide evidence here to aid in the election result
+                    tallying.
+                </p>
+            </div>
+            <div class="solutions">
+                <ul class="items">
+                    <li class="solution-item">
+                        <div class="solution-title">Preserve Evidence</div>
+                        <div>If you notice the voting result does not
+                            match your
+                            chosen candidate,
+                            immediately
+                            take a photo or record the screen as evidence. Be sure to document details like the voting
+                            time,
+                            location, and machine number.
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-title">Contact Election Officials</div>
+                        <div>Report the issue to an election official
+                            on-site immediately,
+                            describe the
+                            problem in detail, and request that the incident be logged in the polling station's records.
+                            Many
+                            polling stations have procedures to address such issues, and officials can guide you in
+                            submitting a
+                            complaint.
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-title">Fill Out a Correction Form</div>
+                        <div>
+                            Some areas allow voters to fill out a
+                            correction form (such as a
+                            “Correction
+                            Form” or “Voter Complaint Form”) to report technical issues or ballot discrepancies,
+                            ensuring
+                            the
+                            problem is addressed properly.
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-title">Contact the Election Board</div>
+                        <div>
+                            Report the issue to your state or local
+                            election board. Some
+                            states
+                            provide
+                            online or phone hotlines where voters can register complaints and receive assistance.
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-title">Track Progress</div>
+                        <div>
+                            Certain state systems allow voters to track the status of
+                            their ballots to
+                            ensure they
+                            are properly counted.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="status">
+        <!--        <ul class="charts">-->
+        <!--            <li class="chart">-->
+        <!--                <img th:src="@{/images/home/red-blue.png}" width="400px" alt="red vs blue"/>-->
+        <!--            </li>-->
+        <!--            <li class="chart">-->
+        <!--                <img th:src="@{/images/home/green.png}" width="400px" alt=""/>-->
+        <!--            </li>-->
+        <!--            <li class="chart">-->
+        <!--                <img th:src="@{/images/home/red.png}" width="400px" alt=""/>-->
+        <!--            </li>-->
+        <!--        </ul>-->
+        <p class="item notice">If there is an error or question regarding your ballot, please take a photo of your
+            evidence and upload it to this website.</p>
+        <div class="item upload">
+            <div>
+                <input id="fileupload" type="file" name="file" data-url="//localhost:8080/api/v1/vote/upload"/>
+            </div>
+            <div id="fileupload-notice"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright"></div>
+        <p>Copyright © 2024 Vote Trump. All Rights Reserved.</p>
+        <div class="donate">
+            <a target="_blank" href="https://www.paypal.com/paypalme/jim1084?locale.x=en_US">
+                <img th:src="@{/images/home/paypal-donate.png}" height="50px" alt="paypal-donate"/>
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/libs/jquery/jquery-1.7.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/libs/wowslider/wowslider.js}"></script>
+    <script type="text/javascript" th:src="@{/js/libs/upload/vendor/jquery.ui.widget.js}"></script>
+    <script type="text/javascript" th:src="@{/js/libs/upload/jquery.iframe-transport.js}"></script>
+    <script type="text/javascript" th:src="@{/js/libs/upload/jquery.fileupload.js}"></script>
+    <script type="text/javascript" th:src="@{/js/home.js}"></script>
 </div>
 </body>
 </html>

@@ -3,6 +3,7 @@ package org.trump.vote.controller;
 import com.cinaval.storage.model.BucketItem;
 import com.cinaval.storage.service.IStorageService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +29,19 @@ public class VoteController {
     @Autowired
     private IStorageService storageService;
 
+    @PostMapping("/upload")
+    @ApiOperation(value = "上传多个文件", notes = "upload")
+    public ResponseEntity<BucketItem> uploadVote(@ApiParam(value = "上传文件", required = true) @RequestParam("file") MultipartFile file) {
+        Optional<BucketItem> result = storageService.upload(file);
+        result.ifPresent(bucketItem -> {
+            voteService.vote("", bucketItem.getUrl());
+        });
+        return ResponseEntity.of(result);
+    }
+
     @PostMapping()
     @ApiOperation(value = "投票", notes = "投票")
-    public void vote(@RequestParam("userId") String userId,
-                     @RequestParam(value = "file", required = false) MultipartFile file) {
+    public void vote(@RequestParam("userId") String userId, @RequestParam(value = "file", required = false) MultipartFile file) {
         TwitterUser user = voteService.getCachedTwitterUser(userId);
         // 检查用户是否已经投票等操作
         boolean isVoted = voteService.isVoted(user.getUserId());
