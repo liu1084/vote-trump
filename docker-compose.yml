@@ -1,0 +1,17 @@
+version: '3'
+services:
+    process:
+        image: hub.cinaval.com:15000/vote-trump
+        network_mode: bridge
+        environment:
+            - ENVIRONMENT=prod #export ENV=dev|test|demo|prod
+            - JVM_MSS=128M
+            - JVM_MSX=128M
+            - JVM_XMS=128M
+            - JVM_XMX=512M
+        volumes:
+            - /root/docker/projects/logs:/app/logs
+        ports:
+            - "8080:8080" # server.port
+            - "5005:5005" # remote debug
+        restart: always

@@ -1,14 +1,14 @@
 isDebug: false
 mysql:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/vote_trump?createDatabaseIfNotExist=true&&serverTimezone=Asia/Shanghai&&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://101.35.247.102:3306/vote_trump?createDatabaseIfNotExist=true&&serverTimezone=Asia/Shanghai&&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false
     username: root
     password: sinoval@2022
     connection-timeout: 30000
 
 spring:
     redis:
-        host: localhost
+        host: 101.35.247.102
         port: 6379
         password: sinoval@2022 # 如果 Redis 没有密码，可以省略
         database: 0 # 使用的数据库索引，默认是0
