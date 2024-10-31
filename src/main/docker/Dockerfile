@@ -1,4 +1,4 @@
-FROM hub.shijiuzhi.com:15000/openjdk:slim
+FROM hub.cinaval.com:15000/openjdk:slim
 MAINTAINER Jim Liu "liujun@qitai.com"
 ENV WORK_DIR="/app" \
     LOG_DIR="logs" \

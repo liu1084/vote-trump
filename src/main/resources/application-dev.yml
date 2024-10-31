@@ -35,5 +35,5 @@ storage:
         file-size: 20 #200MB
 
 app:
-    domainName: https://www.vote-trump.org
-    port: 443
+    domainName: http://localhost
+    port: 8080
