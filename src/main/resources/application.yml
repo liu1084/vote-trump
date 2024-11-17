@@ -16,7 +16,7 @@ mybatis:
 
 spring:
     profiles:
-        active: dev
+        active: prod
     application:
         name: vote-trump
     thymeleaf:
